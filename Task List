@@ -1,0 +1,20 @@
+Use HDFS commands to add/remove files and folders from HDFS
+Use Sqoop to transfer data between HDFS and a RDBMS
+Run a MapReduce job
+Run a YARN application
+Explore and transform data using Pig
+Split a dataset using Pig
+Join two datasets using Pig
+Use Pig to transform and export a dataset for use with Hive
+Use HCatLoader and HCatStorer to retrieve HCatalog schemas from within a Pig script
+Understand how a Hive table is stored in HDFS
+Use Hive to discover useful information in a dataset
+Understand how Hive queries get executed as MapReduce jobs
+Perform a join of two datasets with Hive
+Use advanced Hive features like windowing, views and ORC files
+Use the Hive analytics functions (rank, dense_rank, cume_dist, row_number)
+Write a custom reducer in Python that reduces the number of underlying MapReduce jobs generated from a Hive query
+Analyze and sessionize clickstream data using the Pig DataFu library
+Compute quantiles of NYSE stock prices
+Use Hive to compute ngrams on Avro-formatted files
+Define an Oozie workflow
