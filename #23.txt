@@ -1,0 +1,64 @@
+Friday, November 07, 2014
+7:07 AM
+
+Questions for Hcatalog
+How to upload  with multiple Delimiters
+For " ",
+
+HiveQL:
+
+			SELECT s07.description, s07.total_emp, s08.total_emp, s07.salary
+			FROM
+			  sample_07 s07 JOIN 
+			  sample_08 s08
+			ON ( s07.code = s08.code )
+			WHERE
+			( s07.total_emp > s08.total_emp
+			 AND s07.salary > 100000 )
+			SORT BY s07.salary DESC
+
+	Get the data from sample_07
+	Create a  table sample09 under sample database
+	Uploaded nyse zip file through upload option to /user/sandbox
+	After I load table is available in Hcatalog
+	Drop table in Hcatalog
+	
+	Select * from nyse_stocks
+	describe nyse_stocks
+	select count(*) from nyse_stocks
+	select * from nyse_stocks where stock_symbol="IBM"
+Pig
+	Average of closing stock prices
+		Step 1: Create and name the script
+		Step 2: Loading the data
+		Step 3: Select all records starting with IBM
+		Step 4: iterate and average
+		Step 5: save the script and execute it
+	
+	
+		a=LOAD 'default.nyse_stocks' USING org.apache.hcatalog.pig.HCatLoader();
+		b=FILTER a BY stock_symbol =='IBM' ;
+		c=GROUP b ALL;
+			#Does this create indexes as per PIG’s syntax?
+		d = FOREACH c GENERATE AVG(b.stock_volume);
+		DUMP d;
+	
+	
+	Pig Helper templates for the
+		 Statements
+		 Functions
+		 I/O statements
+		 HCatLoader() 
+		 Python user defined functions.
+	Upload UDF option - available
+
+pig -useHcatalog
+
+Library  files can be copied to
+	Upload the file to /user/sandbox/slf4j-api-1.7.5.jar.zip
+	hadoop fs -get /user/sandbox/slf4j-api-1.7.5.jar.zip
+	
+	
+
+
+	LOAD DATA INPATH '/user/hue/query_result.csv' OVERWRITE INTO TABLE `sample.sample_09`
