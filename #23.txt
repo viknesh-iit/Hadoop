@@ -1,3 +1,52 @@
+http://hortonworks.com/hadoop-tutorial/how-to-process-data-with-apache-pig/
+Same example using pig
+****************************************************************************
+Thursday, November 13, 2014 12:34 AM
+Section 3/14
+http://hortonworks.com/hadoop-tutorial/how-to-process-data-with-apache-hive/
+
+->How to Process Data with Hive using a set of Baseball statistics on American players from 1871-2011.
+Apache Hive Video
+
+What is Hive?
+	DWH  layer 
+	HiveQL  - adhoc que, summarisation and Data Analysis
+	Used for WebLogs
+	Not a RDBMS
+	Not Online transaction Processing .Only Batch
+	Poly Structured data
+
+UDF..No of rows  to a single row.
+
+Hive vs Pig
+	To query  data
+	answer specific question
+	familiar with sql
+Pig;
+	Preparing for Easier analysis
+	data objects only exist inside the script, unless they  are stored	
+	
+Load batting.csv,master.csv
+Create Table - temp_batting
+Batting.csv to temp_batting
+Extract data to  find player with the highest runs for the  year
+Player ID to first and last name of the players
+
+create table temp_batting(col_value STRING)
+LOAD DATA INPATH '/user/sandbox/Batting.csv' OVERWRITE INTO TABLE temp_batting;
+create table batting(player_id STRING,year INT,runs INT);
+insert overwrite table batting
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*)\,?){1}', 1) player_id,
+  regexp_extract(col_value, '^(?:([^,]*)\,?){2}', 1) year,
+  regexp_extract(col_value, '^(?:([^,]*)\,?){9}', 1) run
+from temp_batting;
+SELECT year, max(runs) FROM batting GROUP BY year;
+SELECT a.year, a.player_id, a.runs from batting a
+JOIN (SELECT year, max(runs) runs FROM batting GROUP BY year ) b
+ON (a.year = b.year AND a.runs = b.runs) ;
+
+****************************************************************************
 Friday, November 07, 2014
 7:07 AM
 
@@ -58,7 +107,4 @@ Library  files can be copied to
 	Upload the file to /user/sandbox/slf4j-api-1.7.5.jar.zip
 	hadoop fs -get /user/sandbox/slf4j-api-1.7.5.jar.zip
 	
-	
-
-
-	LOAD DATA INPATH '/user/hue/query_result.csv' OVERWRITE INTO TABLE `sample.sample_09`
+LOAD DATA INPATH '/user/hue/query_result.csv' OVERWRITE INTO TABLE `sample.sample_09`
