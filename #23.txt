@@ -27,22 +27,16 @@ http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
 
 ****************************************************************************
 Tuesday, November 19, 2014
-git status
-Amazing
-git status
-Amazing
-
-git status
-Amazing
-git status
-Amazing
-
+git commands
+	git status -s
+	git add .
+	git commit -m  'change'
+	git push
 
 http://hortonworks.com/hadoop-tutorial/cascading-hortonworks-data-platform-2-1/
 useradd cascade
 cd /home/cascade
 git clone git://github.com/Cascading/Impatient.git
-
 
 export PATH=$PATH:/home/cascade/gradle-2.2/bin
 
