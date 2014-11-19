@@ -28,6 +28,15 @@ http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
 ****************************************************************************
 Tuesday, November 19, 2014
 git status
+Amazing
+git status
+Amazing
+
+git status
+Amazing
+git status
+Amazing
+
 
 http://hortonworks.com/hadoop-tutorial/cascading-hortonworks-data-platform-2-1/
 useradd cascade
