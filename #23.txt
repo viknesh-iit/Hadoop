@@ -1,5 +1,157 @@
+Pending:
+Follow this:
+	http://support.localytics.com/Best_Practices#MapReduce
+	http://support.localytics.com/Raw_Data_Exports
+	What is salesforce relation with localytics
+
+Blog on AppAnalytics through BigData
+	http://ibmdatamag.com/2012/05/why-log-analytics-is-a-great-and-awful-place-to-start-with-big-data/
+	http://www.splunk.com/view/big-data/SP-CAAAGFH
+BigData University
+Use  Pig  to do a data Flow
+	To solve in pig..
+	Find the  previous line  for connection reset
+
+http://www.sumologic.com/product/technology/
+Log Analysis
+	Amazon ELB
+	Amazon S3
+	Ossec
+	Amazon CloudFront
+	Apache
+		Gain A Deep Understanding of Your Apache Environment
+		Gain Real-Time Customer, Product, and Application Insights
+
+8 tools for  log analysis
+http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
+
+****************************************************************************
+Tuesday, November 19, 2014
+
+http://hortonworks.com/hadoop-tutorial/cascading-hortonworks-data-platform-2-1/
+
+
+
+
+http://hortonworks.com/hadoop-tutorial/exploring-data-apache-pig-grunt-shell/
+
+hadoop fs -moveFromLocal /tmp/movies.txt /user/sandbox/
+Movies = LOAD '/user/sandbox/movies.txt' USING PigStorage(',') as (id,name,year,rating,duration);
+DUMP Movies;
+Describe Movies;
+movies_greater_than_three_point_five = FILTER Movies BY rating>3.5;
+foreachexample= foreach movies_greater_than_three_point_five generate year,rating,name;
+dump foreachexample;
+STORE movies_greater_than_three_point_five INTO  '/user/hadoop/movies_greater_than_three_point_five' USING PigStorage (',');
+
+cat /user/hadoop/movies_greater_than_three_point_five/part-m-00000
+cat /user/sandbox/movies.txt
+ls /user/sandbox/
+cd /user/sandbox
+copyToLocal /user/sandbox/movies.txt /tmp/
+hadoop  fs -expunge
+
+Videos from udemy
+
+
+
+****************************************************************************
+Monday, November 17, 2014
+http://hortonworks.com/hadoop-tutorial/loading-data-into-the-hortonworks-sandbox/
+
+Created the  tables using Hcat - omniturelogs,products,users
+
+CREATE VIEW omniture AS SELECT col_2 ts, col_8 ip, col_13 url, col_14 swid, col_50 city, col_51 country, col_53 state from omniturelogs
+create table webloganalytics as select to_date(o.ts) logdate, o.url, o.ip, o.city, upper(o.state) state, o.country, p.category, CAST(datediff( from_unixtime( unix_timestamp() ), from_unixtime( unix_timestamp(u.birth_dt, 'dd-MMM-yy'))) / 365  AS INT) age, u.gender_cd gender from omniture o inner join products p on o.url = p.url left outer join users u on o.swid = concat('{', u.swid , '}')
+
+****************************************************************************
+Monday, November 16, 2014
+CBT Nuggets
+	Hadoop Stack
+	Hadoop
+	Mapreduce
+	Installation in Single Node
+	Installation in Multiple Nodes
+***************************************************************************
+Friday, November 14, 2014
+
 http://hortonworks.com/hadoop-tutorial/how-to-process-data-with-apache-pig/
 Same example using pig
+
+Pig Characteristics and Pig elements
+Pig latin Foundations
+Pigscript examples
+Debugging
+
+Pig
+Data Flow Language
+Extensible through  UDF
+Elements:
+	Pig latin  - High level scripting language
+	Piggy Bank
+Pig Latin
+	Data analysis and infrastructure process
+	
+Direct Acyclic graph/Edges are data Flow/Nodes are operators
+Pig Intrepretor..
+
+Data Types:map,tuple,bag
+illustrate explain DESCRIBE and local mode
+LOAD FILTER GROUP STORE JOIN  DUMP
+USING PigStorage(',')
+
+HCat to load the table
+Group runs by  year and find maximum runs by  year
+Join the max runs by playerid
+
+batting = load '/user/sandbox/Batting.csv' using PigStorage(',');
+describe batting;
+dump batting;
+
+
+batting = LOAD 'Batting.csv' USING PigStorage(',');
+
+-- Strip off the first row (column headings) so the Max function can be used later without errors
+raw_runs = FILTER batting BY $1>0;
+
+-- Create a table with all rows, but only 3 columns
+-- Columns are numbered starting with zero, so the first column is $0, the second is $1, etc.
+all_runs = FOREACH raw_runs GENERATE $0 AS playerID, $1 AS year, $8 AS runs;
+-- Show sample output of all_runs
+limit_all_runs = limit all_runs 5;
+describe all_runs;
+dump limit_all_runs;
+
+-- Group by year
+grp_data = GROUP all_runs BY (year);
+-- Show sample output of grp_data
+limit_grp_data = limit grp_data 5;
+describe grp_data;
+dump limit_grp_data;
+
+-- Create a table that contains each year and the max runs for that year
+max_runs_year = FOREACH grp_data GENERATE group as max_year, MAX(all_runs.runs) AS max_runs;
+-- Show sample output of grp_data
+limit_max_runs_year = limit max_runs_year 5;
+describe max_runs_year;
+dump limit_max_runs_year;
+
+-- Join max_runs_year and all_runs by matching on both year and runs to find the playerID with the max runs each year
+join_max_runs = JOIN max_runs_year BY (max_year, max_runs), all_runs BY (year, runs);
+-- Show sample output of join_max_runs
+limit_join_max_runs = limit join_max_runs 5;
+describe join_max_runs;
+dump limit_join_max_runs;
+
+-- Clean up the output so that only the year, playerID, and the maximum runs are included (columns zero, two and four)
+join_data = FOREACH join_max_runs GENERATE $0 AS year, $2 AS playerID, $4 AS runs;
+-- Show sample output of join_data
+limit_join_data = limit join_data 5;
+describe join_data;
+dump limit_join_data;
+
+
+
 ****************************************************************************
 Thursday, November 13, 2014 12:34 AM
 Section 3/14
