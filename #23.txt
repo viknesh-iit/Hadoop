@@ -1,49 +1,48 @@
 Apache Pages
+Best Pages
 	http://pig.apache.org/docs/r0.10.0/func.html#tomap
 	http://www.slideshare.net/Sudar/pig-workshop
-	
 
 Pending:
-Through Pig
-	To load Json.. and store the values
+	Through Pig
+		To load Json.. and store the values
 
-Is it possible to overwrite Directories
-To form maps in Pig to find which division he is is
-I am working on.....
-	http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html
+	Is it possible to overwrite Directories
+	To form maps in Pig to find which division he is is
+	I am working on.....
+		http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html
 
 
-Hadoop Commands:
-http://hadoop.apache.org/docs/r2.4.0/hadoop-project-dist/hadoop-common/FileSystemShell.html
-What is the difference between dfs command
- Local FS, HFTP FS, S3 FS
+	Hadoop Commands:
+	http://hadoop.apache.org/docs/r2.4.0/hadoop-project-dist/hadoop-common/FileSystemShell.html
+	What is the difference between dfs command
+	 Local FS, HFTP FS, S3 FS
 
-Follow this:
-	http://support.localytics.com/Best_Practices#MapReduce
-	http://support.localytics.com/Raw_Data_Exports
-	What is salesforce relation with localytics
+	Follow this:
+		http://support.localytics.com/Best_Practices#MapReduce
+		http://support.localytics.com/Raw_Data_Exports
+		What is salesforce relation with localytics
 
-Blog on AppAnalytics through BigData
-	http://ibmdatamag.com/2012/05/why-log-analytics-is-a-great-and-awful-place-to-start-with-big-data/
-	http://www.splunk.com/view/big-data/SP-CAAAGFH
-BigData University
-Use  Pig  to do a data Flow
-	To solve in pig..
-	Find the  previous line  for connection reset
+	Blog on AppAnalytics through BigData
+		http://ibmdatamag.com/2012/05/why-log-analytics-is-a-great-and-awful-place-to-start-with-big-data/
+		http://www.splunk.com/view/big-data/SP-CAAAGFH
+	BigData University
+	Use  Pig  to do a data Flow
+		To solve in pig..
+		Find the  previous line  for connection reset
 
-http://www.sumologic.com/product/technology/
-Log Analysis
-	Amazon ELB
-	Amazon S3
-	Ossec
-	Amazon CloudFront
-	Apache
-		Gain A Deep Understanding of Your Apache Environment
-		Gain Real-Time Customer, Product, and Application Insights
+	http://www.sumologic.com/product/technology/
+	Log Analysis
+		Amazon ELB
+		Amazon S3
+		Ossec
+		Amazon CloudFront
+		Apache
+			Gain A Deep Understanding of Your Apache Environment
+			Gain Real-Time Customer, Product, and Application Insights
 
-8 tools for  log analysis
-http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
-
+	8 tools for  log analysis
+	http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
 ****************************************************************************
 Saturday, November 22, 2014
 
