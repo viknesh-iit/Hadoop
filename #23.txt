@@ -1,4 +1,23 @@
+Apache Pages
+	http://pig.apache.org/docs/r0.10.0/func.html#tomap
+	http://www.slideshare.net/Sudar/pig-workshop
+	
+
 Pending:
+Through Pig
+	To load Json.. and store the values
+
+Is it possible to overwrite Directories
+To form maps in Pig to find which division he is is
+I am working on.....
+	http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html
+
+
+Hadoop Commands:
+http://hadoop.apache.org/docs/r2.4.0/hadoop-project-dist/hadoop-common/FileSystemShell.html
+What is the difference between dfs command
+ Local FS, HFTP FS, S3 FS
+
 Follow this:
 	http://support.localytics.com/Best_Practices#MapReduce
 	http://support.localytics.com/Raw_Data_Exports
@@ -26,12 +45,109 @@ Log Analysis
 http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
 
 ****************************************************************************
+Saturday, November 22, 2014
+
+JsonStorage JsonLoader 
+
+Nore:
+If output directory exists, it will not overwrite
+It takes  all files for processing - Good!!!
+Funny  that I gave .json for the O/P directory
+
+
+Pig Version -Apache Pig version 0.12.1.2.1.1.0-385 
+
+http://joshualande.com/read-write-json-apache-pig/	
+Level1 - To parse a simple JSON
+	first_table.json
+	{"food":"Tacos", "person":"Alice", "amount":3}
+	{"food":"Tomato Soup", "person":"Sarah", "amount":2}
+	{"food":"Grilled Cheese", "person":"Alex", "amount":5}
+
+	-- {"food":"Tacos", "person":"Alice", "amount":3}
+	Vikki = LOAD '/user/sandbox/first.json' using JsonLoader('food:chararray,person:chararray,amount:int');
+	STORE Vikki INTO  '/user/sandbox/Vikki' USING PigStorage (',') ;
+ 	hadoop fs  -cat /user/sandbox/Vikki/part-m-00000
+ 
+Level1A:To process multiple files
+ 	/user/sandbox/VikkiInput
+ 	
+ 	Vikki = LOAD '/user/sandbox/VikkiInput' using JsonLoader('food:chararray,person:chararray,amount:int');
+	STORE Vikki INTO  '/user/sandbox/VikkiOutput' USING PigStorage (',') ;
+
+Level2 - To parse JSON which has bags
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+	JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+	STORE Vikki INTO '/user/sandbox/VikkiOutput1' USING PigStorage(',');
+
+	[root@sandbox tmp]# hadoop fs -cat /user/sandbox/VikkiOutput1/part-m-00000
+	Tacos,{(Beef),(Lettuce),(Cheese)},(Alex,25)
+	TomatoSoup,{(Tomatoes),(Milk)},(Steve,23)
+
+Level3  Store as a Map
+
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+	JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+	STORE Vikki INTO '/user/sandbox/VikkiOutput3.json' USING JsonStorage();
+
+	[root@sandbox tmp]# hadoop fs -cat /user/sandbox/VikkiOutput3.json/part-m-00000
+	{"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	{"recipe":"TomatoSoup","ingredients":[{"name":"Tomatoes"},{"name":"Milk"}],"inventor":{"name":"Steve","age":23}}
+
+Level3B How to retrieve few values in a JSON
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+		Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+		JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+	by_pos = ForEach Vikki Generate $0;
+	DUMP by_pos;
+	
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+			Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+			JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+		by_field = ForEach Vikki Generate  ingredients ;
+		DUMP by_field;
+	
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+		JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:map[])  ');
+	by_map = ForEach Vikki Generate inventor#'age' ;
+	dump by_map;
+	
+NOTE:$2 notworking
+Follow this
+http://hortonworks.com/blog/jsonize-anything-in-pig-with-tojson/
+
+Level3A Run a Pig Script  in Grunt Shell. Run in Background
+	
+Level2A
+	Create a Oziee flow in HDP
+	
+Level4 To get files from S3
+Level5 Run a Pig Script in AWS
+Launch EMR
+	./elastic-mapreduce --create --name "Test Pig" \
+	--pig-script s3://elasticmapreduce/samples/pig-apache/do-reports2.pig \
+	--ami-version 2.0 \
+	--args "-p,INPUT=s3://elasticmapreduce/samples/pig-apache/input, \
+	-p,OUTPUT=s3://mybucket/pig-apache/output"
+In an Existing EMR
+	
+Level6 Run a Pipeline in AWS
+Level3 -  To parse JSON which  has missing information
+
+
+****************************************************************************
+
 Tuesday, November 19, 2014
 git commands
 	git status -s
 	git add .
 	git commit -m  'change'
 	git push
+git reference
+	http://gitref.org/remotes/#push
 
 http://hortonworks.com/hadoop-tutorial/cascading-hortonworks-data-platform-2-1/
 useradd cascade
