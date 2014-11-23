@@ -1,5 +1,4 @@
 Complete  this tickets first
-	Use HDFS commands to add/remove files and folders from HDFS
 	Use Sqoop to transfer data between HDFS and a RDBMS --- Downloading mysql for  this.
 	Explore and transform data using Pig
 	Use Pig to transform and export a dataset for use with Hive
@@ -163,7 +162,7 @@ git reference
 http://hortonworks.com/hadoop-tutorial/cascading-hortonworks-data-platform-2-1/
 useradd cascade
 cd /home/cascade
-git clone git://github.com/Cascading/Impatient.git
+	git clone git://github.com/Cascading/Impatient.git
 
 export PATH=$PATH:/home/cascade/gradle-2.2/bin
 

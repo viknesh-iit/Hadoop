@@ -1,14 +1,142 @@
 #1 Use HDFS commands to add/remove files and folders from HDFS
 
-hadoop fs -ls
-hadoop fs -mkdir  /user/sandbox/Temp2
-hadoop fs -put TestDir1/ /user/sandbox/
-hadoop fs -copyFromLocal /tmp/file100 /user/sandbox/Temp2  (Source is restricted to Local)
-hadoop fs -get  /user/sandbox/TestDir1 .
-hadoop fs -cat /user/sandbox/Temp2/file100
-hadoop fs -cp /user/sandbox/TestDir1/*  /user/sandbox/Temp2/
-hadoop fs -mv  /user/sandbox/Temp2/* /user/sandbox/TestDir1/  - not overwriting
-hadoop fs -rm /user/sandbox/TestDir1/
-hadoop fs -rmr /user/sandbox/TestDir1
-hadoop fs -tail /user/sandbox/TestDir1/file1
-hadoop fs -du /user/sandbox/TestDir1/
+https://hadoop.apache.org/docs/r2.4.1/hadoop-project-dist/hadoop-common/FileSystemShell.html#count
+
+****************************************************************************
+hdfs
+  dfs                  run a filesystem command on the file systems supported in Hadoop.
+  dfsadmin             run a DFS admin client
+  namenode -format     format the DFS filesystem
+  secondarynamenode    run the DFS secondary namenode
+  namenode             run the DFS namenode
+  journalnode          run the DFS journalnode
+  zkfc                 run the ZK Failover Controller daemon
+  datanode             run a DFS datanode
+  haadmin              run a DFS HA admin client
+  fsck                 run a DFS filesystem checking utility
+  balancer             run a cluster balancing utility
+  jmxget               get JMX exported values from NameNode or DataNode.
+  oiv                  apply the offline fsimage viewer to an fsimage
+  oev                  apply the offline edits viewer to an edits file
+  fetchdt              fetch a delegation token from the NameNode
+  getconf              get config values from configuration
+  groups               get the groups which users belong to
+  snapshotDiff         diff two snapshots of a directory or diff the
+                       current directory contents with a snapshot
+  lsSnapshottableDir   list all snapshottable dirs owned by the current user
+                                                Use -help to see options
+  portmap              run a portmap service
+  nfs3                 run an NFS version 3 gateway
+  cacheadmin           configure the HDFS cache
+
+****************************************************************************
+hdfs  dfs                  run a filesystem command on the file systems supported in Hadoop.
+        [-appendToFile <localsrc> ... <dst>]
+        [-cat [-ignoreCrc] <src> ...]
+        [-checksum <src> ...]
+        [-chgrp [-R] GROUP PATH...]
+        [-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+        [-chown [-R] [OWNER][:[GROUP]] PATH...]
+        [-copyFromLocal [-f] [-p] <localsrc> ... <dst>]
+        [-copyToLocal [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+        [-count [-q] <path> ...]
+        [-cp [-f] [-p] <src> ... <dst>]
+        [-createSnapshot <snapshotDir> [<snapshotName>]]
+        [-deleteSnapshot <snapshotDir> <snapshotName>]
+        [-df [-h] [<path> ...]]
+        [-du [-s] [-h] <path> ...]
+        [-expunge]
+        [-get [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+        [-getfacl [-R] <path>]
+        [-getmerge [-nl] <src> <localdst>]
+        [-help [cmd ...]]
+        [-ls [-d] [-h] [-R] [<path> ...]]
+        [-mkdir [-p] <path> ...]
+        [-moveFromLocal <localsrc> ... <dst>]
+        [-moveToLocal <src> <localdst>]
+        [-mv <src> ... <dst>]
+        [-put [-f] [-p] <localsrc> ... <dst>]
+        [-renameSnapshot <snapshotDir> <oldName> <newName>]
+        [-rm [-f] [-r|-R] [-skipTrash] <src> ...]
+        [-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+        [-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+        [-setrep [-R] [-w] <rep> <path> ...]
+        [-stat [format] <path> ...]
+        [-tail [-f] <file>]
+        [-test -[defsz] <path>]
+        [-text [-ignoreCrc] <src> ...]
+        [-touchz <path> ...]
+        [-usage [cmd ...]]
+****************************************************************************
+hdfs dfsadmin
+
+           [-report]
+           [-safemode enter | leave | get | wait]
+           [-allowSnapshot <snapshotDir>]
+           [-disallowSnapshot <snapshotDir>]
+           [-saveNamespace]
+           [-rollEdits]
+           [-restoreFailedStorage true|false|check]
+           [-refreshNodes]
+           [-finalizeUpgrade]
+           [-rollingUpgrade [<query|prepare|finalize>]]
+           [-metasave filename]
+           [-refreshServiceAcl]
+           [-refreshUserToGroupsMappings]
+           [-refreshSuperUserGroupsConfiguration]
+           [-refreshCallQueue]
+           [-printTopology]
+           [-refreshNamenodes datanodehost:port]
+           [-deleteBlockPool datanode-host:port blockpoolId [force]]
+           [-setQuota <quota> <dirname>...<dirname>]
+           [-clrQuota <dirname>...<dirname>]
+           [-setSpaceQuota <quota> <dirname>...<dirname>]
+           [-clrSpaceQuota <dirname>...<dirname>]
+           [-setBalancerBandwidth <bandwidth in bytes per second>]
+           [-fetchImage <local directory>]
+           [-shutdownDatanode <datanode_host:ipc_port> [upgrade]]
+           [-getDatanodeInfo <datanode_host:ipc_port>]
+           [-help [cmd]]
+
+
+****************************************************************************
+mapred
+  pipes                run a Pipes job
+  job                  manipulate MapReduce jobs
+  queue                get information regarding JobQueues
+  classpath            prints the class path needed for running
+                       mapreduce subcommands
+  historyserver        run job history servers as a standalone daemon
+  distcp <srcurl> <desturl> copy file or directories recursively
+  archive -archiveName NAME -p <parent path> <src>* <dest> create a hadoop archive
+  hsadmin              job history server admin interface
+
+****************************************************************************
+jps
+****************************************************************************
+Samples:
+
+Hadoop fs/hdfs dfs:
+	hdfs fsck /user/sandbox/Temp2/file100 
+	hadoop fs -ls
+	hadoop fs -ls -R /user/sandbox/
+	hadoop fs -mkdir  /user/sandbox/Temp2
+	hadoop fs -put TestDir1/ /user/sandbox/
+	hadoop fs -du -h /user/ |tail -2
+	hadoop fs -copyFromLocal /tmp/file100 /user/sandbox/Temp2  (Source is restricted to Local)
+	hadoop fs -D dfs.replication=1 -copyFromLocal /tmp/file100 /user/sandbox/Temp2
+	hadoop fs -moveFromLocal /tmp/file100 /user/sandbox/Temp2
+	hadoop fs -get  /user/sandbox/TestDir1 .
+	hadoop fs -cat /user/sandbox/Temp2/file100
+	hadoop fs -cp /user/sandbox/TestDir1/*  /user/sandbox/Temp2/
+	hadoop fs -mv  /user/sandbox/Temp2/* /user/sandbox/TestDir1/  - not overwriting
+	hadoop fs -rm /user/sandbox/TestDir1/
+	hadoop fs -rmr /user/sandbox/TestDir1
+	hadoop fs -tail /user/sandbox/TestDir1/file1
+	hadoop fs -du /user/sandbox/TestDir1/
+	hadoop fs -count -q /user/
+	hdfs dfs -touchz /user/sandbox/file1
+
+hdfs dfsadmin
+	hdfs dfsadmin -report
+	
