@@ -1,0 +1,14 @@
+#1 Use HDFS commands to add/remove files and folders from HDFS
+
+hadoop fs -ls
+hadoop fs -mkdir  /user/sandbox/Temp2
+hadoop fs -put TestDir1/ /user/sandbox/
+hadoop fs -copyFromLocal /tmp/file100 /user/sandbox/Temp2  (Source is restricted to Local)
+hadoop fs -get  /user/sandbox/TestDir1 .
+hadoop fs -cat /user/sandbox/Temp2/file100
+hadoop fs -cp /user/sandbox/TestDir1/*  /user/sandbox/Temp2/
+hadoop fs -mv  /user/sandbox/Temp2/* /user/sandbox/TestDir1/  - not overwriting
+hadoop fs -rm /user/sandbox/TestDir1/
+hadoop fs -rmr /user/sandbox/TestDir1
+hadoop fs -tail /user/sandbox/TestDir1/file1
+hadoop fs -du /user/sandbox/TestDir1/

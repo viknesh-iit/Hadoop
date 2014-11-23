@@ -1,3 +1,10 @@
+Complete  this tickets first
+	Use HDFS commands to add/remove files and folders from HDFS
+	Use Sqoop to transfer data between HDFS and a RDBMS --- Downloading mysql for  this.
+	Explore and transform data using Pig
+	Use Pig to transform and export a dataset for use with Hive
+	Join two datasets using Pig
+
 Apache Pages
 Best Pages
 	http://pig.apache.org/docs/r0.10.0/func.html#tomap
@@ -5,8 +12,9 @@ Best Pages
 
 Pending:
 	Through Pig
+		Pending items in Pig
 		To load Json.. and store the values
-
+		Installing mysql for loading through sqoop
 	Is it possible to overwrite Directories
 	To form maps in Pig to find which division he is is
 	I am working on.....
@@ -43,6 +51,10 @@ Pending:
 
 	8 tools for  log analysis
 	http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
+
+
+****************************************************************************
+
 ****************************************************************************
 Saturday, November 22, 2014
 
