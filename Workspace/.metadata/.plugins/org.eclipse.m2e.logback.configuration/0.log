@@ -228,3 +228,60 @@
 2014-11-12 23:59:51,785 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
 2014-11-12 23:59:51,785 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2014-11-12 23:59:51,785 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:20:50,997 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:20:50,997 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:20:51,013 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:20:51,013 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:21:27,730 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:21:27,730 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:21:27,730 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:21:27,730 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:21:35,654 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:21:35,654 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:21:35,654 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:21:35,670 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:22:07,745 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:22:07,745 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:22:07,745 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:22:07,745 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:22:55,585 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:22:55,585 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:22:55,585 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:22:55,600 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:23:22,432 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:23:22,432 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:23:22,432 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:23:22,432 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:24:28,360 [Worker-6] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: Hadoop:Hadoop:0.0.1-SNAPSHOT @ D:\Hadoop Training\Hadoop\Workspace\Hadoop\pom.xml.
+2014-12-05 05:24:28,610 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:24:28,610 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:24:28,610 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:24:28,610 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:25:29,626 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:25:29,642 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:25:29,642 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:25:29,642 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:25:55,072 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:25:55,088 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:25:55,088 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:25:55,088 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:26:05,727 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:26:05,727 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:26:05,727 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:26:05,727 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:58:51,097 [Worker-17] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:58:51,112 [Worker-17] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:58:51,112 [Worker-17] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:58:51,112 [Worker-17] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 05:59:03,873 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:59:03,873 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 05:59:03,889 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 05:59:03,889 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 06:00:35,198 [ModalContext] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 06:00:35,213 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 06:00:35,213 [ModalContext] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 06:00:35,213 [ModalContext] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources
+2014-12-05 06:01:15,524 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 06:01:15,539 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\main\resources
+2014-12-05 06:01:15,539 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2014-12-05 06:01:15,539 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Hadoop Training\Hadoop\Workspace\Hadoop\src\test\resources

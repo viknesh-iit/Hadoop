@@ -1,0 +1,6 @@
+#22 Create list of hadoop/hdfs commands that are used in exercises (create WIKI) 
+
+Wiki Available 
+https://github.com/viknesh-iit/Hadoop/wiki
+
+Basics Completed

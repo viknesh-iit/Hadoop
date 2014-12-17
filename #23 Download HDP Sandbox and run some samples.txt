@@ -1,0 +1,405 @@
+#23  Download HDP Sandbox and run some samples
+
+Complete the Basic of the ticket.. In the second level go advanced
+Follow the Pig Git..
+
+Complete  this tickets first
+	Use Sqoop to transfer data between HDFS and a RDBMS --- Downloading mysql for  this.
+	Explore and transform data using Pig
+	Use Pig to transform and export a dataset for use with Hive
+	Join two datasets using Pig
+
+Apache Pages
+Best Pages
+	http://pig.apache.org/docs/r0.10.0/func.html#tomap
+	http://www.slideshare.net/Sudar/pig-workshop
+
+
+	
+Pending:
+	Through Pig
+		Pending items in Pig
+		To load Json.. and store the values
+		Installing mysql for loading through sqoop
+	Is it possible to overwrite Directories
+	To form maps in Pig to find which division he is is
+	I am working on.....
+		http://docs.aws.amazon.com/redshift/latest/dg/copy-usage_notes-copy-from-json.html
+
+
+	Hadoop Commands:
+	http://hadoop.apache.org/docs/r2.4.0/hadoop-project-dist/hadoop-common/FileSystemShell.html
+	What is the difference between dfs command
+	 Local FS, HFTP FS, S3 FS
+
+	Follow this:
+		http://support.localytics.com/Best_Practices#MapReduce
+		http://support.localytics.com/Raw_Data_Exports
+		What is salesforce relation with localytics
+
+	Blog on AppAnalytics through BigData
+		http://ibmdatamag.com/2012/05/why-log-analytics-is-a-great-and-awful-place-to-start-with-big-data/
+		http://www.splunk.com/view/big-data/SP-CAAAGFH
+	BigData University
+	Use  Pig  to do a data Flow
+		To solve in pig..
+		Find the  previous line  for connection reset
+
+	http://www.sumologic.com/product/technology/
+	Log Analysis
+		Amazon ELB
+		Amazon S3
+		Ossec
+		Amazon CloudFront
+		Apache
+			Gain A Deep Understanding of Your Apache Environment
+			Gain Real-Time Customer, Product, and Application Insights
+
+	8 tools for  log analysis
+	http://codecondo.com/8-tools-for-log-monitoring-and-processing-big-data/
+
+
+****************************************************************************
+
+****************************************************************************
+Saturday, November 22, 2014
+
+JsonStorage JsonLoader 
+
+Nore:
+If output directory exists, it will not overwrite
+It takes  all files for processing - Good!!!
+Funny  that I gave .json for the O/P directory
+
+
+Pig Version -Apache Pig version 0.12.1.2.1.1.0-385 
+
+http://joshualande.com/read-write-json-apache-pig/	
+Level1 - To parse a simple JSON
+	first_table.json
+	{"food":"Tacos", "person":"Alice", "amount":3}
+	{"food":"Tomato Soup", "person":"Sarah", "amount":2}
+	{"food":"Grilled Cheese", "person":"Alex", "amount":5}
+
+	-- {"food":"Tacos", "person":"Alice", "amount":3}
+	Vikki = LOAD '/user/sandbox/first.json' using JsonLoader('food:chararray,person:chararray,amount:int');
+	STORE Vikki INTO  '/user/sandbox/Vikki' USING PigStorage (',') ;
+ 	hadoop fs  -cat /user/sandbox/Vikki/part-m-00000
+ 
+Level1A:To process multiple files
+ 	/user/sandbox/VikkiInput
+ 	
+ 	Vikki = LOAD '/user/sandbox/VikkiInput' using JsonLoader('food:chararray,person:chararray,amount:int');
+	STORE Vikki INTO  '/user/sandbox/VikkiOutput' USING PigStorage (',') ;
+
+Level2 - To parse JSON which has bags
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+	JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+	STORE Vikki INTO '/user/sandbox/VikkiOutput1' USING PigStorage(',');
+
+	[root@sandbox tmp]# hadoop fs -cat /user/sandbox/VikkiOutput1/part-m-00000
+	Tacos,{(Beef),(Lettuce),(Cheese)},(Alex,25)
+	TomatoSoup,{(Tomatoes),(Milk)},(Steve,23)
+
+Level3  Store as a Map
+
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+	JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+	STORE Vikki INTO '/user/sandbox/VikkiOutput3.json' USING JsonStorage();
+
+	[root@sandbox tmp]# hadoop fs -cat /user/sandbox/VikkiOutput3.json/part-m-00000
+	{"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	{"recipe":"TomatoSoup","ingredients":[{"name":"Tomatoes"},{"name":"Milk"}],"inventor":{"name":"Steve","age":23}}
+
+Level3B How to retrieve few values in a JSON
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+		Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+		JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+	by_pos = ForEach Vikki Generate $0;
+	DUMP by_pos;
+	
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+			Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+			JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor:(name:chararray,age:int) ');
+		by_field = ForEach Vikki Generate  ingredients ;
+		DUMP by_field;
+	
+	-- {"recipe":"Tacos","ingredients":[{"name":"Beef"},{"name":"Lettuce"},{"name":"Cheese"}],"inventor":{"name":"Alex","age":25}}
+	Vikki = LOAD '/user/sandbox/VikkiInput1' USING 
+		JsonLoader('recipe:chararray,ingredients: {( name:chararray )},inventor	)  ');
+	by_map = ForEach Vikki Generate inventor#'age' ;
+	dump by_map;
+	
+NOTE:$2 notworking
+Follow this
+http://hortonworks.com/blog/jsonize-anything-in-pig-with-tojson/
+
+Level3A Run a Pig Script  in Grunt Shell. Run in Background
+	
+Level2A
+	Create a Oziee flow in HDP
+	
+Level4 To get files from S3
+Level5 Run a Pig Script in AWS
+Launch EMR
+	./elastic-mapreduce --create --name "Test Pig" \
+	--pig-script s3://elasticmapreduce/samples/pig-apache/do-reports2.pig \
+	--ami-version 2.0 \
+	--args "-p,INPUT=s3://elasticmapreduce/samples/pig-apache/input, \
+	-p,OUTPUT=s3://mybucket/pig-apache/output"
+In an Existing EMR
+	
+Level6 Run a Pipeline in AWS
+Level3 -  To parse JSON which  has missing information
+
+
+****************************************************************************
+
+Tuesday, November 19, 2014
+git commands
+	git status -s
+	git add .
+	git commit -m  'change'
+	git push
+git reference
+	http://gitref.org/remotes/#push
+
+http://hortonworks.com/hadoop-tutorial/cascading-hortonworks-data-platform-2-1/
+useradd cascade
+cd /home/cascade
+	git clone git://github.com/Cascading/Impatient.git
+
+export PATH=$PATH:/home/cascade/gradle-2.2/bin
+
+http://hortonworks.com/hadoop-tutorial/exploring-data-apache-pig-grunt-shell/
+
+hadoop fs -moveFromLocal /tmp/movies.txt /user/sandbox/
+Movies = LOAD '/user/sandbox/movies.txt' USING PigStorage(',') as (id,name,year,rating,duration);
+DUMP Movies;
+Describe Movies;
+movies_greater_than_three_point_five = FILTER Movies BY rating>3.5;
+foreachexample= foreach movies_greater_than_three_point_five generate year,rating,name;
+dump foreachexample;
+STORE movies_greater_than_three_point_five INTO  '/user/hadoop/movies_greater_than_three_point_five' USING PigStorage (',');
+
+cat /user/hadoop/movies_greater_than_three_point_five/part-m-00000
+cat /user/sandbox/movies.txt
+ls /user/sandbox/
+cd /user/sandbox
+copyToLocal /user/sandbox/movies.txt /tmp/
+hadoop  fs -expunge
+
+Videos from udemy
+
+
+
+****************************************************************************
+Monday, November 17, 2014
+http://hortonworks.com/hadoop-tutorial/loading-data-into-the-hortonworks-sandbox/
+
+Created the  tables using Hcat - omniturelogs,products,users
+
+CREATE VIEW omniture AS SELECT col_2 ts, col_8 ip, col_13 url, col_14 swid, col_50 city, col_51 country, col_53 state from omniturelogs
+create table webloganalytics as select to_date(o.ts) logdate, o.url, o.ip, o.city, upper(o.state) state, o.country, p.category, CAST(datediff( from_unixtime( unix_timestamp() ), from_unixtime( unix_timestamp(u.birth_dt, 'dd-MMM-yy'))) / 365  AS INT) age, u.gender_cd gender from omniture o inner join products p on o.url = p.url left outer join users u on o.swid = concat('{', u.swid , '}')
+
+****************************************************************************
+Monday, November 16, 2014
+CBT Nuggets
+	Hadoop Stack
+	Hadoop
+	Mapreduce
+	Installation in Single Node
+	Installation in Multiple Nodes
+***************************************************************************
+Friday, November 14, 2014
+
+http://hortonworks.com/hadoop-tutorial/how-to-process-data-with-apache-pig/
+Same example using pig
+
+Pig Characteristics and Pig elements
+Pig latin Foundations
+Pigscript examples
+Debugging
+
+Pig
+Data Flow Language
+Extensible through  UDF
+Elements:
+	Pig latin  - High level scripting language
+	Piggy Bank
+Pig Latin
+	Data analysis and infrastructure process
+	
+Direct Acyclic graph/Edges are data Flow/Nodes are operators
+Pig Intrepretor..
+
+Data Types:map,tuple,bag
+illustrate explain DESCRIBE and local mode
+LOAD FILTER GROUP STORE JOIN  DUMP
+USING PigStorage(',')
+
+HCat to load the table
+Group runs by  year and find maximum runs by  year
+Join the max runs by playerid
+
+batting = load '/user/sandbox/Batting.csv' using PigStorage(',');
+describe batting;
+dump batting;
+
+
+batting = LOAD 'Batting.csv' USING PigStorage(',');
+
+-- Strip off the first row (column headings) so the Max function can be used later without errors
+raw_runs = FILTER batting BY $1>0;
+
+-- Create a table with all rows, but only 3 columns
+-- Columns are numbered starting with zero, so the first column is $0, the second is $1, etc.
+all_runs = FOREACH raw_runs GENERATE $0 AS playerID, $1 AS year, $8 AS runs;
+-- Show sample output of all_runs
+limit_all_runs = limit all_runs 5;
+describe all_runs;
+dump limit_all_runs;
+
+-- Group by year
+grp_data = GROUP all_runs BY (year);
+-- Show sample output of grp_data
+limit_grp_data = limit grp_data 5;
+describe grp_data;
+dump limit_grp_data;
+
+168
+(1871,66.0)
+
+-- Create a table that contains each year and the max runs for that year
+max_runs_year = FOREACH grp_data GENERATE group as max_year, MAX(all_runs.runs) AS max_runs;
+-- Show sample output of grp_data
+limit_max_runs_year = limit max_runs_year 5;
+describe max_runs_year;
+dump limit_max_runs_year;
+
+-- Join max_runs_year and all_runs by matching on both year and runs to find the playerID with the max runs each year
+join_max_runs = JOIN max_runs_year BY (max_year, max_runs), all_runs BY (year, runs);
+-- Show sample output of join_max_runs
+limit_join_max_runs = limit join_max_runs 5;
+describe join_max_runs;
+dump limit_join_max_runs;
+
+-- Clean up the output so that only the year, playerID, and the maximum runs are included (columns zero, two and four)
+join_data = FOREACH join_max_runs GENERATE $0 AS year, $2 AS playerID, $4 AS runs;
+-- Show sample output of join_data
+limit_join_data = limit join_data 5;
+describe join_data;
+dump limit_join_data;
+
+
+
+****************************************************************************
+Thursday, November 13, 2014 12:34 AM
+Section 3/14
+http://hortonworks.com/hadoop-tutorial/how-to-process-data-with-apache-hive/
+
+->How to Process Data with Hive using a set of Baseball statistics on American players from 1871-2011.
+Apache Hive Video
+
+What is Hive?
+	DWH  layer 
+	HiveQL  - adhoc que, summarisation and Data Analysis
+	Used for WebLogs
+	Not a RDBMS
+	Not Online transaction Processing .Only Batch
+	Poly Structured data
+
+UDF..No of rows  to a single row.
+
+Hive vs Pig
+	To query  data
+	answer specific question
+	familiar with sql
+Pig;
+	Preparing for Easier analysis
+	data objects only exist inside the script, unless they  are stored	
+	
+Load batting.csv,master.csv
+Create Table - temp_batting
+Batting.csv to temp_batting
+Extract data to  find player with the highest runs for the  year
+Player ID to first and last name of the players
+
+create table temp_batting(col_value STRING)
+LOAD DATA INPATH '/user/sandbox/Batting.csv' OVERWRITE INTO TABLE temp_batting;
+create table batting(player_id STRING,year INT,runs INT);
+insert overwrite table batting
+SELECT
+  regexp_extract(col_value, '^(?:([^,]*)\,?){1}', 1) player_id,
+  regexp_extract(col_value, '^(?:([^,]*)\,?){2}', 1) year,
+  regexp_extract(col_value, '^(?:([^,]*)\,?){9}', 1) run
+from temp_batting;
+SELECT year, max(runs) FROM batting GROUP BY year;
+SELECT a.year, a.player_id, a.runs from batting a
+JOIN (SELECT year, max(runs) runs FROM batting GROUP BY year ) b
+ON (a.year = b.year AND a.runs = b.runs) ;
+
+****************************************************************************
+Friday, November 07, 2014
+7:07 AM
+
+Questions for Hcatalog
+How to upload  with multiple Delimiters
+For " ",
+
+HiveQL:
+
+			SELECT s07.description, s07.total_emp, s08.total_emp, s07.salary
+			FROM
+			  sample_07 s07 JOIN 
+			  sample_08 s08
+			ON ( s07.code = s08.code )
+			WHERE
+			( s07.total_emp > s08.total_emp
+			 AND s07.salary > 100000 )
+			SORT BY s07.salary DESC
+
+	Get the data from sample_07
+	Create a  table sample09 under sample database
+	Uploaded nyse zip file through upload option to /user/sandbox
+	After I load table is available in Hcatalog
+	Drop table in Hcatalog
+	
+	Select * from nyse_stocks
+	describe nyse_stocks
+	select count(*) from nyse_stocks
+	select * from nyse_stocks where stock_symbol="IBM"
+Pig
+	Average of closing stock prices
+		Step 1: Create and name the script
+		Step 2: Loading the data
+		Step 3: Select all records starting with IBM
+		Step 4: iterate and average
+		Step 5: save the script and execute it
+	
+	
+		a=LOAD 'default.nyse_stocks' USING org.apache.hcatalog.pig.HCatLoader();
+		b=FILTER a BY stock_symbol =='IBM' ;
+		c=GROUP b ALL;
+			#Does this create indexes as per PIG’s syntax?
+		d = FOREACH c GENERATE AVG(b.stock_volume);
+		DUMP d;
+	
+	
+	Pig Helper templates for the
+		 Statements
+		 Functions
+		 I/O statements
+		 HCatLoader() 
+		 Python user defined functions.
+	Upload UDF option - available
+
+pig -useHcatalog
+
+Library  files can be copied to
+	Upload the file to /user/sandbox/slf4j-api-1.7.5.jar.zip
+	hadoop fs -get /user/sandbox/slf4j-api-1.7.5.jar.zip
+	
+LOAD DATA INPATH '/user/hue/query_result.csv' OVERWRITE INTO TABLE `sample.sample_09`

@@ -1,0 +1,33 @@
+#6 Split a dataset using Pig
+
+Tuesday, November 25, 2014
+9:10 PM
+
+http://stackoverflow.com/questions/17353966/divide-two-numbers-from-two-tuples-in-a-bag
+
+
+--{group:'abc', G:{('abc', 'A', 10), ('abc', 'B', 20)}
+Vikki = LOAD 'data/tosplit.json' using
+JsonLoader {group: chararray,G: { (query: chararray,type: chararray,count: long)}};
+Type = ForEach Vikki Generate type;
+STORE Type into 'dataoutputType'
+
+
+
+Vikki = LOAD '/user/sandbox/first.json' using JsonLoader('food:chararray,person:chararray,amount:int');
+	
+	STORE Vikki INTO  '/user/sandbox/Vikki' USING PigStorage (',') ;
+
+
+I = group G by query;
+J = foreach I {
+CC=filter G by type=='A';
+VV=filter G by type=='B';
+--generate group, (float)(FLATTEN(CC.count))/(float)(FLATTEN(VV.count)) as CTR, CC, VV ;
+--or generate group, (float)(FLATTEN(CC.count))/FLATTEN(VV.count), CC.count, VV.count;
+--or generate group, CC.count/VV.count, CC.count, VV.count;
+
+
+SPLIT G INTO typeA IF type == 'A', typeB IF type == 'B';
+I = JOIN typeA BY query, typeB BY query;
+J = FOREACH I GENERATE typeA::query, (float)typeA::count/typeB::count;

@@ -1,0 +1,21 @@
+Different Types of Udfs
+	Eval Functions - Foreach
+	Filter functions  - Filte(Returns boolean)
+	Load functions
+	Store functions
+
+
+Eval: FromVim(StripQuote($6))
+	Extend EvalFunc<T> interface [EvalFunc<String>]
+	The generic <T> should contain the return type
+	Input comes as a Tuple
+	Should check for empty and nulls in input
+	Extend exec() function and it should return the value
+	Extend getArgToFuncMapping() to let UDF know about Argument mapping
+	Extend outputSchema() to let UDF know about output schema
+Filter:
+	Extends FilterFun, which is a EvalFunc<Boolean>
+	Should return a boolean
+	Input it is same as EvalFunc<T>
+	Should check for empty and nulls in input
+	Extend getArgToFuncMapping() to let UDF know about Argument mapping

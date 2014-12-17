@@ -1,0 +1,51 @@
+Tuesday, November 25, 2014
+5:06 AM
+
+Running Pig
+	Inline in shell -Worked (Basic)
+	From a file- From File (Basic)
+	Streaming through other executable
+	Embed script in other languages
+
+
+data/
+1       {(1,2),(2,3)}   [name#sudar,age#30]
+
+
+Vikki = LOAD '/user/sandbox/test/nestedschema'  using  ('line'); - NOt working
+
+Vikki = LOAD 'data/'  USING PigStorage(',');
+STORE Vikki INTO  'dataoutput/' USING PigStorage (',') ;
+
+
+file = LOAD 'data/dropbox-policy.txt' AS (line);
+data = LOAD 'data/tweets.csv' USING PigStorage(',');
+data = LOAD 'data/tweets.csv' USING PigStorage(',') AS ('list', 'of', 'fields');
+PigStorage – for most cases
+TextLoader – to load text files
+JSONLoader – to load JSON files
+Custom loaders – You can write your own custom loaders as well
+
+We can specify a schema (collection of datatypes) to `LOAD` statements
+data = LOAD 'data/data-bag.txt' USING PigStorage(',') AS (f1:int, f2:int, f3:int);
+data = LOAD 'data/nested-schema.txt' AS (f1:int, f2:bag{t:tuple(n1:int, n2:int)}, f3:map[]);
+
+Fields can be looked up by
+Position
+Name
+Map Lookup
+
+data = LOAD 'data/nested-schema.txt' AS (f1:int, f2:bag{t:tuple(n1:int, n2:int)}, f3:map[]);
+
+by_pos = FOREACH data GENERATE $0;
+DUMP by_pos;
+
+by_field = FOREACH data GENERATE f2;
+DUMP by_field;
+
+by_map = FOREACH data GENERATE f3#'name';
+DUMP by_map;
+
+****************************************************************************
+
+
