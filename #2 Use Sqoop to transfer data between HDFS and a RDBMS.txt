@@ -6,7 +6,6 @@ Advanced:
 --last-value (value)	Specifies the maximum value of the check column from the previous import.
 
 
-
 Issues:
 	From Cmd - Find the IP of the machine
 	Create a user who can connect from any  machine  %
